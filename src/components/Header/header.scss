@@ -1,0 +1,13 @@
+.header {
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: bisque;
+    padding-left: 30px;
+    width: 100vw;
+
+    &__logo {
+        color: red;
+    }
+}
