@@ -1,6 +1,10 @@
+// COMMON
+@import './components/scss/common.scss';
 // COMPONENTS
 @import './components/Header/header.scss';
 @import './components/NavigateBar/navigateBar.scss';
 
 // PAGES
-@import './pages/LoginPage/LoginPage.scss';
+@import './pages/LoginPage/loginPage.scss';
+@import './pages/Home/home.scss';
+@import './pages/SignIn/signInPage.scss';

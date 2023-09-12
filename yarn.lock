@@ -7758,6 +7758,11 @@ react-error-overlay@^6.0.11:
   resolved "https://registry.npmjs.org/react-error-overlay/-/react-error-overlay-6.0.11.tgz"
   integrity sha512-/6UZ2qgEyH2aqzYZgQPxEnz33NJ2gNsnHA2o5+o4wW9bLM/JYQitNP9xPhsXwC08hMMovfGe/8retsdDsczPRg==
 
+react-inputs-validation@^4.9.9:
+  version "4.9.9"
+  resolved "https://registry.yarnpkg.com/react-inputs-validation/-/react-inputs-validation-4.9.9.tgz#bac8fc53e4a288a24f9863917283d555684fe445"
+  integrity sha512-HiPSVV2K36m+0oNxleUUJsYLsXJ33Y+xn6WJNJG8GVB4s819IxCA9gDP/343zSiqW1H7Ou3QVA630Y1YuKyoCA==
+
 react-is@^16.13.1:
   version "16.13.1"
   resolved "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"

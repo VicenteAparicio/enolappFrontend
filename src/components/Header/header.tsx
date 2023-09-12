@@ -1,4 +1,4 @@
-import { NavigateBar } from "../NavigateBar/NavigateBar";
+import { NavigateBar } from "../NavigateBar/navigateBar";
 
 const baseClass = "header";
 
@@ -9,7 +9,7 @@ export const Header = () => {
             <div className={baseClass + '__logo'}>
                 LOGO
             </div>
-            <NavigateBar/>
+            <NavigateBar />
         </header>
     )
 }
