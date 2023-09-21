@@ -78,7 +78,7 @@ export const SignInPage = () => {
                 <div className="button_Container">
                     <button className="button" onClick={() => register()} name="Sign up" >Register</button>
                     <NavLink className='button' to='/'>
-                        Log in in
+                        Log in
                     </NavLink>
                 </div>
             </div>

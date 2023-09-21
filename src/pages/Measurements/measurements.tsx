@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import AuthService from "../../services/auth.service";
 import { useNavigate } from "react-router-dom";
 import DataService from "../../services/data.service";
 import { IDataModel } from "../models/IDataModel";
 import { ILoggerResponse } from "../models/ILoggerResponse";
+import { Dropdown } from "../../components/Dropdown/dropdown";
+import { InsertData } from "../../components/InsertData/insertData";
 
 const baseClass = 'measurements';
 
@@ -11,6 +13,7 @@ export const Measurements = () => {
     const navigate = useNavigate();
     const [userLog, setUserLog] = useState<ILoggerResponse>()
     const [data, setData] = useState<IDataModel[]>()
+    const [modal, setModal] = useState<boolean>(false);
 
     useEffect(() => {
         setTimeout(() => {
@@ -26,20 +29,26 @@ export const Measurements = () => {
         } else {
             setUserLog(result)
         }
+
+        getData(result?.data.id!);
     }
 
-    const getData = async () => {
-        const dataReponse = await DataService.getAll(userLog?.data.id!)
-        setData(dataReponse);
+    const getData = async (userId: number) => {
+
+        const dataReponse = await DataService.getAll();
+
+        if (dataReponse.length > 1) {
+            setData(dataReponse);
+        }
     }
 
 
-    const deleteData = async (data_id: number) => {
-        const result = await DataService.deleteData(data_id);
+    const deleteData = async (dataId: number) => {
+        const result = await DataService.deleteData(dataId);
         if (result) {
             alert("Data has been removed.")
         }
-        getData();
+        getData(userLog?.data.id!);
     }
 
     const logout = () => {
@@ -47,18 +56,25 @@ export const Measurements = () => {
         navigate('/')
     }
 
-    const updateData = async () => { }
+    const openCloseModal = async () => {
+        setModal(!modal);
+    }
 
     return (
         <div className={baseClass}>
 
             <div className={baseClass + '__container'}>
-                <button className="buttonCard" onClick={() => logout()}>
-                    Logout
-                </button>
-                <button className="buttonCard" onClick={() => getData()}>
+                <div className="managerButtons">
+                    {modal && <button className="buttonCard" onClick={() => openCloseModal()}>Cancel</button> || <button className="buttonCard" onClick={() => openCloseModal()}>Add New</button>}
+                    <button className="buttonCard" onClick={() => logout()}>
+                        Logout
+                    </button>
+                </div>
+
+                {modal && <InsertData />}
+                {/* <button className="buttonCard" onClick={() => getData(userLog?.data.id!)}>
                     Refresh Data
-                </button>
+                </button> */}
 
 
                 <div className="dataContainer">
@@ -75,8 +91,9 @@ export const Measurements = () => {
 
                             </div>
                             <div className="buttons">
-                                <button className="buttonCard" onClick={() => updateData()}>Update</button>
                                 <button className="buttonCard" onClick={() => deleteData(item.id)}>Delete</button>
+
+
                             </div>
 
                         </div>

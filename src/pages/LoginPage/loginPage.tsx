@@ -2,15 +2,10 @@ import React, { useEffect, useState } from "react";
 import { NavLink, } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import AuthService from "../../services/auth.service";
-import { useSelector } from "react-redux";
-import { IUserState } from "../models/IUserState";
-import { useDispatch } from "react-redux";
 
 const baseClass = "loginPage";
 
 export const LoginPage = () => {
-
-    const dispatch = useDispatch();
 
     const [user, setUser] = useState({
         email: '', password: ''
@@ -26,29 +21,18 @@ export const LoginPage = () => {
 
     const auth = () => {
         const result = AuthService.getCurrentUser()
-
         if (result) {
             navigate('/measurements')
         }
     }
 
-    const login = async () => {
-        const userLoggerResponse = AuthService.login(
+    const login = () => {
+        AuthService.login(
             user.email.toLocaleLowerCase(),
             user.password
         )
-        dispatch({ type: "ADD_USER", payload: userLoggerResponse });
-
         navigate('/measurements')
     }
-
-    // const AuthUserLogger = () => {
-    //     const result = useSelector<IUserState, IUserState["data"]>((state) => state.data);
-
-    //     if (result) {
-    //         navigate('/measurements')
-    //     }
-    // }
 
     const inputEvent = (event: React.ChangeEvent<HTMLInputElement>) => {
         setUser({

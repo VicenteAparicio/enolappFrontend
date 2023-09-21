@@ -14,7 +14,6 @@ export class AuthService {
             .post(API_URL + "/login", body)
             .then(response => {
                 if (response.data.data.token) {
-
                     const userLoggerResponse = JSON.stringify(response.data);
                     sessionStorage.setItem("user", userLoggerResponse);
                 }
