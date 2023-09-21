@@ -10,14 +10,9 @@ export const NavigateBar = () => {
                 <NavLink className='links' to='/'>
                     Login
                 </NavLink>
-
-
-                <NavLink className='links' to='/home'>
-                    Home
+                <NavLink className='links' to='/measurements'>
+                    Measurements
                 </NavLink>
-
-
-
             </ul>
         </div>
     )
