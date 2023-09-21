@@ -1,7 +1,7 @@
 import axios from "axios";
 import { IDataModel } from "../pages/models/IDataModel";
 
-const API_URL = process.env.BACKEND_URL;
+const API_URL = 'https://enolapp-backend-c29bc0412d42.herokuapp.com';
 
 export class DataService {
     async getAll(user_id: number): Promise<IDataModel[]> {
