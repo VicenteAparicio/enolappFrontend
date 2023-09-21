@@ -1,7 +1,7 @@
 import axios from "axios";
 import { IDataModel } from "../pages/models/IDataModel";
 
-const API_URL = "http://localhost:3001";
+const API_URL = process.env.BACKEND_URL;
 
 export class DataService {
     async getAll(user_id: number): Promise<IDataModel[]> {

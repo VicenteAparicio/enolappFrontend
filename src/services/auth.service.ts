@@ -1,6 +1,6 @@
 import axios from "axios";
 import { ILoggerResponse } from "../pages/models/ILoggerResponse";
-const API_URL = "http://localhost:3001";
+const API_URL = process.env.BACKEND_URL;
 
 export class AuthService {
 
