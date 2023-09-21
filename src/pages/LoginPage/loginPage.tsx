@@ -1,13 +1,55 @@
-import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { NavLink, } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import AuthService from "../../services/auth.service";
+import { useSelector } from "react-redux";
+import { IUserState } from "../models/IUserState";
+import { useDispatch } from "react-redux";
+import Drop from "../../components/Drop/drop";
 
 const baseClass = "loginPage";
 
 export const LoginPage = () => {
+
+    const dispatch = useDispatch();
+
     const [user, setUser] = useState({
-        userName: '',
-        password: ''
+        email: '', password: ''
     });
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        setTimeout(() => {
+            auth();
+        }, 300);
+    }, [])
+
+    const auth = () => {
+        const result = AuthService.getCurrentUser()
+
+        if (result) {
+            navigate('/measurements')
+        }
+    }
+
+    const login = async () => {
+        const userLoggerResponse = AuthService.login(
+            user.email.toLocaleLowerCase(),
+            user.password
+        )
+        dispatch({ type: "ADD_USER", payload: userLoggerResponse });
+
+        navigate('/measurements')
+    }
+
+    // const AuthUserLogger = () => {
+    //     const result = useSelector<IUserState, IUserState["data"]>((state) => state.data);
+
+    //     if (result) {
+    //         navigate('/measurements')
+    //     }
+    // }
 
     const inputEvent = (event: React.ChangeEvent<HTMLInputElement>) => {
         setUser({
@@ -16,21 +58,18 @@ export const LoginPage = () => {
         });
     }
 
-    const sendLogin = () => {
-
-    }
-
     return (
         <div className={baseClass}>
-            <form className={baseClass + '__container'}>
+            <form className='container'>
+                <h2 className="titleSection">LOGIN</h2>
                 <label className='commonLabel'>
                     User name
                 </label>
                 <input
                     className='commonInput'
                     type='text'
-                    id="userName"
-                    name="userName"
+                    id="email"
+                    name="email"
                     placeholder="user"
                     onChange={
                         (evnt: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,24 +81,22 @@ export const LoginPage = () => {
                 </label>
                 <input
                     className='commonInput'
-                    type='text'
-                    id="password"
-                    name="password"
-                    placeholder="password"
+                    type='password'
+                    id='password'
+                    name='password'
+                    placeholder='password'
                     onChange={
                         (evnt: React.ChangeEvent<HTMLInputElement>) => {
                             inputEvent(evnt)
                         }
                     } />
-                <div className="button_Container">
-                    <button className="button" onSubmit={sendLogin} name="Sign in" >Log in</button>
+                <div className='button_Container'>
+                    <button className="button" onClick={() => login()} name='Sign in' >Log in</button>
                     <NavLink className='button' to='/signIn'>
                         Sign in
                     </NavLink>
                 </div>
             </form>
-
-
         </div >
     )
 }

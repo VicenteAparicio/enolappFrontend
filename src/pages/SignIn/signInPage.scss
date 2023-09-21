@@ -1,0 +1,31 @@
+.signInPage {
+    display: flex;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+
+    .registerContainer {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+    }
+
+    .passwordValidation {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .validateError {
+        display: flex;
+        flex-direction: column;
+        color: yellow;
+        font-size: 12px;
+        margin-bottom: 8px;
+    }
+
+    .inputContainer {
+        display: flex;
+        flex-direction: column;
+    }
+
+}
