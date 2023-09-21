@@ -5,7 +5,6 @@ import AuthService from "../../services/auth.service";
 import { useSelector } from "react-redux";
 import { IUserState } from "../models/IUserState";
 import { useDispatch } from "react-redux";
-import Drop from "../../components/Drop/drop";
 
 const baseClass = "loginPage";
 
