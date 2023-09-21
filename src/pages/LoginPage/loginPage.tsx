@@ -62,7 +62,7 @@ export const LoginPage = () => {
             <form className='container'>
                 <h2 className="titleSection">LOGIN</h2>
                 <label className='commonLabel'>
-                    User name
+                    Email
                 </label>
                 <input
                     className='commonInput'

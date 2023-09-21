@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import AuthService from "../../services/auth.service";
 import { validationPassword } from "../utils/validationPassword";
 
@@ -77,7 +77,9 @@ export const SignInPage = () => {
                 </div>
                 <div className="button_Container">
                     <button className="button" onClick={() => register()} name="Sign up" >Register</button>
-
+                    <NavLink className='button' to='/'>
+                        Log in in
+                    </NavLink>
                 </div>
             </div>
         </div>
