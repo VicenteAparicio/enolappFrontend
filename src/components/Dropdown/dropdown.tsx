@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IDropdown, IDropdownProps } from '../../pages/models/IDropdown';
+import { IDropdownProps } from '../../pages/models/IDropdown';
 
 export const Dropdown: React.FC<IDropdownProps> = ({ options, onSelect }) => {
     const [selectedValue, setSelectedValue] = useState<string>('');
@@ -11,10 +11,10 @@ export const Dropdown: React.FC<IDropdownProps> = ({ options, onSelect }) => {
     };
 
     return (
-        <select value={selectedValue} onChange={handleSelectChange}>
+        <select required={true} value={selectedValue} onChange={handleSelectChange}>
             <option value="">Seleccionar opción</option>
-            {options.map((option) => (
-                <option key={option.value} value={option.value}>
+            {options.map((option, index) => (
+                <option key={index} value={option.value}>
                     {option.label}
                 </option>
             ))}
