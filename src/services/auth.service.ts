@@ -1,6 +1,7 @@
 import axios from "axios";
 import { ILoggerResponse } from "../pages/models/ILoggerResponse";
-const API_URL = 'https://enolapp-backend-c29bc0412d42.herokuapp.com';
+// const API_URL = 'https://enolapp-backend-c29bc0412d42.herokuapp.com';
+const API_URL = 'http://localhost:3001';
 
 export class AuthService {
 
@@ -20,6 +21,7 @@ export class AuthService {
 
                 return response.data;
             })
+            .catch(Error);
     }
 
     logout() {
@@ -40,6 +42,7 @@ export class AuthService {
                     return response.data.data;
                 }
             })
+            .catch(Error);
     }
 
     getCurrentUser() {

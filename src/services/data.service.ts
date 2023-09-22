@@ -2,7 +2,8 @@ import axios from "axios";
 import { IData, IDataModel } from "../pages/models/IDataModel";
 import AuthService from "./auth.service";
 
-const API_URL = 'https://enolapp-backend-c29bc0412d42.herokuapp.com';
+// const API_URL = 'https://enolapp-backend-c29bc0412d42.herokuapp.com';
+const API_URL = 'http://localhost:3001';
 
 export class DataService {
     async getAll(): Promise<IDataModel[]> {
@@ -14,6 +15,7 @@ export class DataService {
                 }
             })
             .then(response => response.data.data)
+            .catch(Error);
     }
 
     async deleteData(data_id: number): Promise<boolean> {
@@ -25,6 +27,7 @@ export class DataService {
                 }
             })
             .then(response => response.data.data)
+            .catch(Error);
     }
 
     async insert(body: IData) {
@@ -36,6 +39,7 @@ export class DataService {
                 }
             })
             .then(response => response.data)
+            .catch(Error);
     }
 }
 
