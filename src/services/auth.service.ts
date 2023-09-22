@@ -1,7 +1,6 @@
 import axios from "axios";
 import { ILoggerResponse } from "../pages/models/ILoggerResponse";
-// const API_URL = 'https://enolapp-backend-c29bc0412d42.herokuapp.com';
-const API_URL = 'http://localhost:3001';
+const API_URL = 'https://enolapp-backend-c29bc0412d42.herokuapp.com';
 
 export class AuthService {
 

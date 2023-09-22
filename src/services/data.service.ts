@@ -2,8 +2,7 @@ import axios from "axios";
 import { IData, IDataModel } from "../pages/models/IDataModel";
 import AuthService from "./auth.service";
 
-// const API_URL = 'https://enolapp-backend-c29bc0412d42.herokuapp.com';
-const API_URL = 'http://localhost:3001';
+const API_URL = 'https://enolapp-backend-c29bc0412d42.herokuapp.com';
 
 export class DataService {
     async getAll(): Promise<IDataModel[]> {

@@ -3,15 +3,12 @@ import AuthService from "../../services/auth.service";
 import { useNavigate } from "react-router-dom";
 import DataService from "../../services/data.service";
 import { IDataModel } from "../models/IDataModel";
-import { ILoggerResponse } from "../models/ILoggerResponse";
-import { Dropdown } from "../../components/Dropdown/dropdown";
 import { InsertData } from "../../components/InsertData/insertData";
 
 const baseClass = 'measurements';
 
 export const Measurements = () => {
     const navigate = useNavigate();
-    const [userLog, setUserLog] = useState<ILoggerResponse>()
     const [data, setData] = useState<IDataModel[]>()
     const [modal, setModal] = useState<boolean>(false);
 
@@ -25,8 +22,6 @@ export const Measurements = () => {
         const result = AuthService.getCurrentUser();
         if (!result) {
             navigate('/')
-        } else {
-            setUserLog(result);
         }
 
         getData();
