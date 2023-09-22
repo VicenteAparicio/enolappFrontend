@@ -9,7 +9,6 @@ const baseClass = "insertData";
 
 export const InsertData: React.FC = () => {
 
-    const [validate, setValidate] = useState<boolean>(false);
     const [buttonClassValidation, setButtonClassValidation] = useState('')
     const [errors, setErrors] = useState({ eAño: '', eTemperatura: '', eGraduacion: '', ePh: '', eObservaciones: '' });
     const [insertObject, setInsertObject] = useState<IData>({
@@ -26,14 +25,12 @@ export const InsertData: React.FC = () => {
 
     const ageRG = new RegExp(/^(\d{4})$/);
     const tempRG = new RegExp(/^(\d{1}|\d{2})$/);
-    const textRG = new RegExp(/^(?!\s*$).+/g);
 
     useEffect(() => {
         if (errors.eAño === ''
             && errors.eTemperatura === ''
             && errors.eGraduacion === ''
             && errors.ePh === '') {
-            setValidate(true);
             setButtonClassValidation('');
         } else {
             setButtonClassValidation('buttonClassValidation');
@@ -107,17 +104,16 @@ export const InsertData: React.FC = () => {
     }
 
     const addData = () => {
-        if (!validate) {
-            const currentUser = AuthService.getCurrentUser();
+        const currentUser = AuthService.getCurrentUser();
 
-            const body: IData = {
-                ...insertObject,
-                userId: currentUser?.data.id!
-            }
-            dataService.insert(body);
-
-            dataService.getAll();
+        const body: IData = {
+            ...insertObject,
+            userId: currentUser?.data.id!
         }
+        dataService.insert(body);
+
+        dataService.getAll();
+
     }
 
     const variedades: IDropdown[] = [
