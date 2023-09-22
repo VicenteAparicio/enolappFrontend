@@ -23,7 +23,6 @@ export const Measurements = () => {
 
     const auth = () => {
         const result = AuthService.getCurrentUser();
-
         if (!result) {
             navigate('/')
         } else {
@@ -34,20 +33,18 @@ export const Measurements = () => {
     }
 
     const getData = async () => {
-
         const dataReponse = await DataService.getAll();
-
-        if (dataReponse.length > 0) {
+        if (dataReponse.length >= 1) {
             setData(dataReponse);
+        } else {
+            setData([])
         }
     }
 
 
     const deleteData = async (dataId: number) => {
-        const result = await DataService.deleteData(dataId);
-        if (result) {
-            alert("Data has been removed.")
-        }
+        await DataService.deleteData(dataId);
+        alert('Data has been removed.')
         getData();
     }
 
@@ -72,10 +69,6 @@ export const Measurements = () => {
                 </div>
 
                 {modal && <InsertData />}
-                {/* <button className="buttonCard" onClick={() => getData(userLog?.data.id!)}>
-                    Refresh Data
-                </button> */}
-
 
                 <div className="dataContainer">
                     <div>
