@@ -27,17 +27,17 @@ export const Measurements = () => {
         if (!result) {
             navigate('/')
         } else {
-            setUserLog(result)
+            setUserLog(result);
         }
 
-        getData(result?.data.id!);
+        getData();
     }
 
-    const getData = async (userId: number) => {
+    const getData = async () => {
 
         const dataReponse = await DataService.getAll();
 
-        if (dataReponse.length > 1) {
+        if (dataReponse.length > 0) {
             setData(dataReponse);
         }
     }
@@ -48,7 +48,7 @@ export const Measurements = () => {
         if (result) {
             alert("Data has been removed.")
         }
-        getData(userLog?.data.id!);
+        getData();
     }
 
     const logout = () => {
@@ -78,26 +78,26 @@ export const Measurements = () => {
 
 
                 <div className="dataContainer">
-                    {data?.map((item, index) => (
-                        <div className="dataCard" key={index}>
-                            <div className="__dataDetails">
-                                <p className="__dataDetailsText">{item.año}</p>
-                                <p className="__dataDetailsText">{item.variedad}</p>
-                                <p className="__dataDetailsText">{item.tipo}</p>
-                                <p className="__dataDetailsText">{item.color}</p>
-                                <p className="__dataDetailsText">{item.temperatura}</p>
-                                <p className="__dataDetailsText">{item.graduacion}</p>
-                                <p className="__dataDetailsText">{item.observaciones}</p>
+                    <div>
+                        <p className="titleCollection">COLLECTION</p>
+                        {data?.map((item, index) => (
+                            <div className="dataCard" key={index}>
+                                <div className="__dataDetails">
+                                    <p className="__dataDetailsText">{item.año}</p>
+                                    <p className="__dataDetailsText">{item.variedad}</p>
+                                    <p className="__dataDetailsText">{item.tipo}</p>
+                                    <p className="__dataDetailsText">{item.color}</p>
+                                    <p className="__dataDetailsText">{item.temperatura}º</p>
+                                    <p className="__dataDetailsText">{item.graduacion}º</p>
+                                    <p className="__dataDetailsText">{item.observaciones}</p>
 
+                                </div>
+                                <div className="buttons">
+                                    <button className="buttonCard" onClick={() => deleteData(item.id)}>Delete</button>
+                                </div>
                             </div>
-                            <div className="buttons">
-                                <button className="buttonCard" onClick={() => deleteData(item.id)}>Delete</button>
-
-
-                            </div>
-
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </div>
             </div>
         </div >

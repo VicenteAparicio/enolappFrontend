@@ -10,12 +10,10 @@ export const SignInPage = () => {
 
     const [credentials, setCredentials] = useState({ nickname: '', email: '', password: '' });
     const [errors, setErrors] = useState({ eNickname: '', eEmail: '', ePassword: [''] });
-    const [validate, setValidate] = useState<boolean>(false);
     const [buttonClassValidation, setButtonClassValidation] = useState('')
 
     useEffect(() => {
         if (errors.eNickname === '' && errors.eEmail === '' && errors.ePassword.length === 1) {
-            setValidate(true);
             setButtonClassValidation('');
         } else {
             setButtonClassValidation('buttonClassValidation');
@@ -52,16 +50,15 @@ export const SignInPage = () => {
     }
 
     const register = async () => {
-        if (!validate) {
-            const result = await AuthService.register(
-                credentials.nickname,
-                credentials.email,
-                credentials.password
-            );
-            if (result) {
-                navigate('/')
-            }
+        const result = await AuthService.register(
+            credentials.nickname,
+            credentials.email,
+            credentials.password
+        );
+        if (result) {
+            navigate('/')
         }
+
     }
 
     return (
@@ -69,16 +66,14 @@ export const SignInPage = () => {
             <div className='container'>
                 <div className='registerContainer'>
                     <h2 className="titleSection">REGISTER</h2>
-
-
                     <label className="commonLabel">Nickname</label>
-                    <input className="commonInput" type="text" name="nickname" onChange={updateCredentials} placeholder="Nickname" />
+                    <input required={true} className="commonInput" type="text" name="nickname" onChange={updateCredentials} placeholder="Nickname" />
                     <div className="validateError">{errors.eNickname}</div>
                     <label className="commonLabel">EMAIL</label>
-                    <input className="commonInput" type="email" name="email" onChange={updateCredentials} placeholder="Email" />
+                    <input required={true} className="commonInput" type="email" name="email" onChange={updateCredentials} placeholder="Email" />
                     <div className="validateError">{errors.eEmail}</div>
                     <label className="commonLabel">PASSWORD</label>
-                    <input className="commonInput" type="password" name="password" onChange={updateCredentials} placeholder="Password" />
+                    <input required={true} className="commonInput" type="password" name="password" onChange={updateCredentials} placeholder="Password" />
                     <div className="passwordValidation">
                         {errors.ePassword.map((err, index) => (
                             <div key={index} className="validateError">{err}</div>
