@@ -66,28 +66,43 @@ export const Measurements = () => {
                 {modal && <InsertData />}
 
                 <div className="dataContainer">
-                    <div>
-                        <p className="titleCollection">COLLECTION</p>
-                        {data?.map((item, index) => (
-                            <div className="dataCard" key={index}>
-                                <div className="__dataDetails">
-                                    <p className="__dataDetailsText">{item.año}</p>
-                                    <p className="__dataDetailsText">{item.variedad}</p>
-                                    <p className="__dataDetailsText">{item.tipo}</p>
-                                    <p className="__dataDetailsText">{item.color}</p>
-                                    <p className="__dataDetailsText">{item.temperatura}º</p>
-                                    <p className="__dataDetailsText">{item.graduacion}º</p>
-                                    <p className="__dataDetailsText">{item.observaciones}</p>
+                    <p className="titleCollection">COLLECTION</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Año</th>
+                                <th>Variedad</th>
+                                <th>Tipo</th>
+                                <th>Color</th>
+                                <th>Temperatura</th>
+                                <th>Graduación</th>
+                                <th>PH</th>
+                                <th>Observaciones</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {data?.map((item, index) => (
+                                <tr key={index}>
+                                    <td className="__dataDetailsText">{item.año}</td>
+                                    <td className="__dataDetailsText">{item.variedad}</td>
+                                    <td className="__dataDetailsText">{item.tipo}</td>
+                                    <td className="__dataDetailsText">{item.color}</td>
+                                    <td className="__dataDetailsText">{item.temperatura}º</td>
+                                    <td className="__dataDetailsText">{item.graduacion}º</td>
+                                    <td className="__dataDetailsText">{item.ph}º</td>
+                                    <td className="__dataDetailsText">{item.observaciones}</td>
 
-                                </div>
-                                <div className="buttons">
-                                    <button className="buttonCard" onClick={() => deleteData(item.id)}>Delete</button>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
+                                    <div className="buttons">
+                                        <button className="buttonCard" onClick={() => deleteData(item.id)}>Delete</button>
+                                    </div>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
                 </div>
             </div>
-        </div >
+
+        </div>
     )
 }
