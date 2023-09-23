@@ -10,7 +10,8 @@ const baseClass = "insertData";
 export const InsertData: React.FC = () => {
 
     const [buttonClassValidation, setButtonClassValidation] = useState('')
-    const [errors, setErrors] = useState({ eAño: '', eTemperatura: '', eGraduacion: '', ePh: '', eObservaciones: '' });
+    const [validate, setValidate] = useState<boolean>(false);
+    const [errors, setErrors] = useState({ eAño: ' ', eTemperatura: '', eGraduacion: '', ePh: '', eObservaciones: '' });
     const [insertObject, setInsertObject] = useState<IData>({
         userId: 0,
         año: 0,
@@ -31,8 +32,10 @@ export const InsertData: React.FC = () => {
             && errors.eTemperatura === ''
             && errors.eGraduacion === ''
             && errors.ePh === '') {
+            setValidate(true)
             setButtonClassValidation('');
         } else {
+            setValidate(false);
             setButtonClassValidation('buttonClassValidation');
         }
     }, [errors]);
@@ -104,15 +107,17 @@ export const InsertData: React.FC = () => {
     }
 
     const addData = () => {
-        const currentUser = AuthService.getCurrentUser();
+        if (validate) {
+            const currentUser = AuthService.getCurrentUser();
 
-        const body: IData = {
-            ...insertObject,
-            userId: currentUser?.data.id!
+            const body: IData = {
+                ...insertObject,
+                userId: currentUser?.data.id!
+            }
+            dataService.insert(body);
+
+            dataService.getAll();
         }
-        dataService.insert(body);
-
-        dataService.getAll();
 
     }
 

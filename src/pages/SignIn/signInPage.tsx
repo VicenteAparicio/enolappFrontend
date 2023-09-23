@@ -9,13 +9,16 @@ export const SignInPage = () => {
     const navigate = useNavigate();
 
     const [credentials, setCredentials] = useState({ nickname: '', email: '', password: '' });
-    const [errors, setErrors] = useState({ eNickname: '', eEmail: '', ePassword: [''] });
+    const [validate, setValidate] = useState<boolean>(false);
+    const [errors, setErrors] = useState({ eNickname: ' ', eEmail: '', ePassword: [''] });
     const [buttonClassValidation, setButtonClassValidation] = useState('')
 
     useEffect(() => {
         if (errors.eNickname === '' && errors.eEmail === '' && errors.ePassword.length === 1) {
+            setValidate(true);
             setButtonClassValidation('');
         } else {
+            setValidate(false);
             setButtonClassValidation('buttonClassValidation');
         }
     }, [errors]);
@@ -50,13 +53,15 @@ export const SignInPage = () => {
     }
 
     const register = async () => {
-        const result = await AuthService.register(
-            credentials.nickname,
-            credentials.email,
-            credentials.password
-        );
-        if (result) {
-            navigate('/')
+        if (validate) {
+            const result = await AuthService.register(
+                credentials.nickname,
+                credentials.email,
+                credentials.password
+            );
+            if (result) {
+                navigate('/')
+            }
         }
 
     }
@@ -65,13 +70,17 @@ export const SignInPage = () => {
         <div className={baseClass}>
             <div className='container'>
                 <div className='registerContainer'>
+
                     <h2 className="titleSection">REGISTER</h2>
+
                     <label className="commonLabel">Nickname</label>
                     <input required={true} className="commonInput" type="text" name="nickname" onChange={updateCredentials} placeholder="Nickname" />
                     <div className="validateError">{errors.eNickname}</div>
+
                     <label className="commonLabel">EMAIL</label>
                     <input required={true} className="commonInput" type="email" name="email" onChange={updateCredentials} placeholder="Email" />
                     <div className="validateError">{errors.eEmail}</div>
+
                     <label className="commonLabel">PASSWORD</label>
                     <input required={true} className="commonInput" type="password" name="password" onChange={updateCredentials} placeholder="Password" />
                     <div className="passwordValidation">
@@ -79,6 +88,7 @@ export const SignInPage = () => {
                             <div key={index} className="validateError">{err}</div>
                         ))}
                     </div>
+
                 </div>
                 <div className="button_Container">
                     <button className={`button ${buttonClassValidation}`} onClick={() => register()} name="Sign up" >Register</button>

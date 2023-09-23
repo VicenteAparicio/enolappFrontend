@@ -49,8 +49,9 @@ export const LoginPage = () => {
                     Email
                 </label>
                 <input
+                    required={true}
                     className='commonInput'
-                    type='text'
+                    type='email'
                     id="email"
                     name="email"
                     placeholder="user"
@@ -65,6 +66,7 @@ export const LoginPage = () => {
                 <input
                     className='commonInput'
                     type='password'
+                    required={true}
                     id='password'
                     name='password'
                     placeholder='password'
@@ -73,12 +75,12 @@ export const LoginPage = () => {
                             inputEvent(evnt)
                         }
                     } />
-                <div className='button_Container'>
-                    <button className="button" onClick={() => login()} name='Sign in' >Log in</button>
-                    <NavLink className='button' to='/signIn'>
-                        Sign in
-                    </NavLink>
-                </div>
+                {/* <div className='button_Container'> */}
+                <button className="button" onClick={() => login()} name='login' >Log in</button>
+                <NavLink className='button' to='/signIn'>
+                    Sign in
+                </NavLink>
+                {/* </div> */}
             </form>
         </div >
     )
