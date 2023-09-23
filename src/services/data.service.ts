@@ -1,23 +1,44 @@
 import axios from "axios";
-import { IDataModel } from "../pages/models/IDataModel";
+import { IData, IDataModel } from "../pages/models/IDataModel";
+import AuthService from "./auth.service";
 
-const API_URL = "http://localhost:3001";
+const API_URL = 'https://enolapp-backend-c29bc0412d42.herokuapp.com';
 
 export class DataService {
-    async getAll(user_id: number): Promise<IDataModel[]> {
-        return axios
-            .get(API_URL + "/data/fromUser/" + user_id)
-            .then(response => {
-                return response.data.data;
+    async getAll(): Promise<IDataModel[]> {
+        const user = AuthService.getCurrentUser();
+        return await axios
+            .get(API_URL + "/data/fromUser/" + user?.data.id, {
+                headers: {
+                    'Authorization': `Bearer ${user?.data.token}`
+                }
             })
+            .then(response => response.data.data)
+            .catch(Error);
     }
 
     async deleteData(data_id: number): Promise<boolean> {
-        return axios
-            .delete(API_URL + "/data/" + data_id)
-            .then(response => {
-                return response.data.data;
+        const user = AuthService.getCurrentUser();
+        return await axios
+            .delete(API_URL + "/data/" + data_id, {
+                headers: {
+                    'Authorization': `Bearer ${user?.data.token}`
+                }
             })
+            .then(response => response.data.data)
+            .catch(Error);
+    }
+
+    async insert(body: IData) {
+        const user = AuthService.getCurrentUser();
+        return await axios
+            .post(API_URL + "/data", body, {
+                headers: {
+                    'Authorization': `Bearer ${user?.data.token}`
+                }
+            })
+            .then(response => response.data)
+            .catch(Error);
     }
 }
 

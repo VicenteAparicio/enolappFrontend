@@ -1,6 +1,9 @@
 {
   "name": "enolapp-frontend",
   "version": "0.1.0",
+  "engines": {
+    "node": "16.20.2"
+  },
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",

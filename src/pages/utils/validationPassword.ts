@@ -20,14 +20,10 @@ export const validationPassword = (pass: string): string[] => {
         comboIssues.push('Lowercase missing.');
     }
     if (!numberRG.test(pass)) {
-        comboIssues.push(
-            'Number missing.',
-        );
+        comboIssues.push('Number missing.');
     }
     if (!specialRG.test(pass)) {
-        comboIssues.push(
-            ('Special character missing.'),
-        );
+        comboIssues.push('Special character missing.');
     }
 
     return comboIssues;

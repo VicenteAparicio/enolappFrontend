@@ -2,16 +2,10 @@ import React, { useEffect, useState } from "react";
 import { NavLink, } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import AuthService from "../../services/auth.service";
-import { useSelector } from "react-redux";
-import { IUserState } from "../models/IUserState";
-import { useDispatch } from "react-redux";
-import Drop from "../../components/Drop/drop";
 
 const baseClass = "loginPage";
 
 export const LoginPage = () => {
-
-    const dispatch = useDispatch();
 
     const [user, setUser] = useState({
         email: '', password: ''
@@ -27,29 +21,18 @@ export const LoginPage = () => {
 
     const auth = () => {
         const result = AuthService.getCurrentUser()
-
         if (result) {
             navigate('/measurements')
         }
     }
 
-    const login = async () => {
-        const userLoggerResponse = AuthService.login(
+    const login = () => {
+        AuthService.login(
             user.email.toLocaleLowerCase(),
             user.password
         )
-        dispatch({ type: "ADD_USER", payload: userLoggerResponse });
-
         navigate('/measurements')
     }
-
-    // const AuthUserLogger = () => {
-    //     const result = useSelector<IUserState, IUserState["data"]>((state) => state.data);
-
-    //     if (result) {
-    //         navigate('/measurements')
-    //     }
-    // }
 
     const inputEvent = (event: React.ChangeEvent<HTMLInputElement>) => {
         setUser({
@@ -63,11 +46,12 @@ export const LoginPage = () => {
             <form className='container'>
                 <h2 className="titleSection">LOGIN</h2>
                 <label className='commonLabel'>
-                    User name
+                    Email
                 </label>
                 <input
+                    required={true}
                     className='commonInput'
-                    type='text'
+                    type='email'
                     id="email"
                     name="email"
                     placeholder="user"
@@ -82,6 +66,7 @@ export const LoginPage = () => {
                 <input
                     className='commonInput'
                     type='password'
+                    required={true}
                     id='password'
                     name='password'
                     placeholder='password'
@@ -90,12 +75,12 @@ export const LoginPage = () => {
                             inputEvent(evnt)
                         }
                     } />
-                <div className='button_Container'>
-                    <button className="button" onClick={() => login()} name='Sign in' >Log in</button>
-                    <NavLink className='button' to='/signIn'>
-                        Sign in
-                    </NavLink>
-                </div>
+                {/* <div className='button_Container'> */}
+                <button className="button" onClick={() => login()} name='login' >Log in</button>
+                <NavLink className='button' to='/signIn'>
+                    Sign in
+                </NavLink>
+                {/* </div> */}
             </form>
         </div >
     )

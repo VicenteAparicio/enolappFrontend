@@ -35,6 +35,8 @@
     color: white;
 }
 
+
+
 .button {
     all: unset;
     display: flex;
@@ -54,5 +56,17 @@
         background-color: rgb(68, 0, 68);
         color: white;
     }
+}
 
+.buttonClassValidation {
+    background-color: grey;
+    color: white;
+}
+
+.validateError {
+    display: flex;
+    flex-direction: column;
+    color: yellow;
+    font-size: 12px;
+    margin-bottom: 8px;
 }
